@@ -14,6 +14,8 @@ namespace CopyPasta
     public partial class Form1 : Form
     {
         public static BindingList<string> copied = new BindingList<string>();
+        private int listSize = 32;
+
         private const int WM_CLIPBOARDUPDATE = 0x031D;
 
         //pinvoke calls for add and remove clipboard listener functions
@@ -45,6 +47,15 @@ namespace CopyPasta
             {
                 copied.Add(Clipboard.GetText());
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            // Get the currently selected item in the ListBox.
+            string curItem = CopyList.SelectedItem.ToString();
+
+            //place in clipboard
+            Clipboard.SetText(curItem);
         }
     }
 }
